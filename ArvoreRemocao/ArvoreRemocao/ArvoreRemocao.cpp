@@ -248,10 +248,40 @@ void removerElementoArvore(NO* no, int valor) {
 
 
 	// caso 1: sem filhos	
-	
+	if (atual->dir == NULL && atual->esq == NULL) {
+		if (pai->dir->valor == atual->valor) {
+			pai->dir = NULL;
+			free(atual);
+		}
+		else {
+			pai->esq = NULL;
+			free(atual);
+		}
+	}
 
 	// caso 2: um filho	
-	
+	else if ((atual->dir != NULL && atual->esq == NULL) || (atual->esq != NULL && atual->dir == NULL)) {
+		if (pai->dir->valor == atual->valor) {
+			if (atual->dir != NULL) {
+				pai->dir = atual->dir;
+				free(atual);
+			}
+			else {
+				pai->dir = atual->esq;
+				free(atual);
+			}
+		}
+		else {
+			if (atual->dir != NULL) {
+				pai->esq = atual->dir;
+				free(atual);
+			}
+			else {
+				pai->esq = atual->esq;
+				free(atual);
+			}
+		}
+	}
 
 	// caso 3: dois filhos
 
